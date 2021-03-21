@@ -12,13 +12,13 @@ Sovelluksessa on vain yksi käyttäjärooli.
 
 Seuraavat sivut:
 * Kirjautumissivu: kirjaudu tai rekisteröidy
- * -> rekisteröitymissivu
- * -> toimintosivu
+  * -> rekisteröitymissivu
+  * -> toimintosivu
 * Toimintosivu: Valitse tietojen katseleminen, tietojen tallennus, oikeuksen antaminen tai uloskirjautuminen
- * -> Katseleminen
- * -> Tallentaminen
- * -> Oikeuksien antaminen
- * -> uloskirjautuminen: Kirjautumissivulle
+  * -> Katseleminen
+  * -> Tallentaminen
+  * -> Oikeuksien antaminen
+  * -> uloskirjautuminen: Kirjautumissivulle
 * Katselemissivu: Kirjatut tiedot
 * Tallentamissivu: Valitse tietotyyppi, lisää tiedot ja tallenna. 
 * Oikeuksien antamissivu: Anna käyttäjätunnus, valitse annettavat oikeudet (tietojen katseleminen, tietojen tallentaminen, kommentin tallentaminen)
