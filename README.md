@@ -2,7 +2,7 @@
 
 ## Tilanne tällä hetkellä
 
-Sovelluksessa toimivat rekisteröityminen, sisäänkirjautuminen, uloskirjautuminen, vauvan lisääminen ja painon lisääminen. Tietojen katselua ei ole vielä toteutettu, joten lisättyjä tietoja on katsottava suoraan tietokannasta psql:n kautta.
+Sovellusta voi testata Herokussa: https://tsoha-vauvanhoitosovellus.herokuapp.com/ Sovelluksessa toimivat rekisteröityminen, sisäänkirjautuminen, uloskirjautuminen, vauvan lisääminen ja painon lisääminen. Tietojen katselua ei ole vielä toteutettu, joten lisättyjä tietoja on katsottava suoraan tietokannasta psql:n kautta.
 
 ## Sovelluksen tarkoitus
 
