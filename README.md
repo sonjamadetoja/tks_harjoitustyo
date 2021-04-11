@@ -1,5 +1,9 @@
 # Kuvaus
 
+## Tilanne tällä hetkellä
+
+Sovelluksessa toimivat rekisteröityminen, sisäänkirjautuminen, uloskirjautuminen, vauvan lisääminen ja painon lisääminen. Tietojen katselua ei ole vielä toteutettu, joten lisättyjä tietoja on katsottava suoraan tietokannasta psql:n kautta.
+
 ## Sovelluksen tarkoitus
 
 Sovelluksen tarkoitus on kirjata vauvanhoitoa koskevia tietoja. Sovellusta voi käyttää rekisteröitynyt käyttäjä, joka voi myös antaa muille käyttäjille mahdollisuuden katsoa tai muuttaa vauvan tietoja. Lisäksi käyttäjä voi jättää kommentteja vauvanhoitoon liittyen.
