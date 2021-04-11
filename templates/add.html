@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<h1>Tietojen tallentaminen</h1>
+<h2>Lisää vauva</h2>
+<p>
+<form action="/addbaby" method="POST">
+Nimi: <input type="text" name="name">
+<p>
+<input type="submit" value="Lisää">
+</form>
+<p>
+<h2>Lisää vauvan tietoja</h2>
+<ul>
+  <li> Imetys: <p>
+<form action="/addbrfeed" method="POST">
+Nimi: <input type="text" name="name"><p>
+Päivämäärä: <input type="text" name="date"> <p>
+Aloitusaika: <input type="text" name="start_time"> <p>
+Kesto: <input type="text" name="duration"> 
+<p>
+<input type="submit" value="Lisää" <br>
+</form>
+  <li> Korvike: <p>
+<form action="/addformula" method="POST">
+Nimi: <input type="text" name="name"><p>
+Päivämäärä: <input type="text" name="date"> <p>
+Aloitusaika: <input type="text" name="start_time"> <p>
+Määrä: <input type="text" name="amount">    
+<p>
+<input type="submit" value="Lisää" <br>
+</form>
+  <li> Kiinteä ruoka <p>
+<form action="/addsolid" method="POST">
+Nimi: <input type="text" name="name"><p>
+Ruoka:  <input type="text" name="food"> <p>
+Määrä (grammaa): <input type="text" name="<amount"> <p>
+Päivämäärä: <input type="text" name="date"> <p>
+Aloitusaika: <input type="text" name="start_time">    
+<p>
+<input type="submit" value="Lisää" <br>
+</form>
+  <li> Vaipat <p>
+<form action="/adddiaper" method="POST">
+Nimi: <input type="text" name="name"><p>
+Sisältö: <br>
+<input type="radio" name="diaper" value="pissa" checked> pissa <input type="radio" name="diaper" value="kakka"> kakka <p>
+Päivämäärä: <input type="text" name="date"> <p>
+Kellonaika: <input type="text" name="start_time">   
+<p>
+<input type="submit" value="Lisää" <br>
+</form>
+  <li> Paino
+<p>
+<form action="/addweight" method="POST">
+Nimi: <input type="text" name="name"><p>
+Paino:  <input type="text" name="weight"> <p>
+Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP')
+<p>
+<input type="submit" value="Lisää" <br>
+</form>
+</ul>
+<p>
