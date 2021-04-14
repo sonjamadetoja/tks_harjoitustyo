@@ -8,14 +8,13 @@ def login(name,password):
     result = db.session.execute(sql, {"name":name})
     user = result.fetchone()
     if user == None:
-        render_template("error.html", message="users/login1")
         return False
     else:
         if check_password_hash(user[0],password):
             session["user_id"] = user[1]
+            session["username"] = name
             return True
         else:
-            render_template("error.html", message="users/login2")
             return False
 
 def logout():
@@ -34,3 +33,4 @@ def register(name,password):
     except:
         return render_template("error.html", message="users/register")
     return login(name,password)
+

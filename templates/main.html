@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% if session.username %}
+{% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <p>
 <a href="/browse">Katsele tietoja</a>
@@ -9,4 +9,6 @@
 <a href="/rights">Anna oikeuksia muille käyttäjille</a>
 <p>
 <a href="/logout">Kirjaudu ulos</a>
+{% else %}
+Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
 {% endif %}
