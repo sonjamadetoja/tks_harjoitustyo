@@ -13,6 +13,9 @@ def register():
     if request.method == "POST":
         username = request.form["name"]
         password = request.form["password"]
+        password2 = request.form["password2"]
+        if password != password2:
+            return render_template("error.html", message="Salasanat eivät täsmää.")
         if users.register(username, password):
             return redirect("/main")
         else:
