@@ -64,3 +64,14 @@ def addweight():
         return redirect("/main")
     else: 
         return render_template("error.html", message="routes/addweight")
+
+@app.route("/addbrfeed", methods=["post"])
+def addbrfeed():
+    name = request.form["name"]
+    date = request.form["date"]
+    start_time = request.form["start_time"]
+    duration = request.form["duration"]
+    if content.addbrfeed(name, date, start_time, duration):
+        return redirect("/main")
+    else: 
+        return render_template("error.html", message="routes/addbrfeed")
