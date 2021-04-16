@@ -4,7 +4,7 @@
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}. <a href="/logout">Kirjaudu ulos</a>
 <p>
-<a href="/main"> Palaa edelliselle etusivulle. </a>
+<a href="/main"> Palaa etusivulle </a>
 <p>
 
 <h2>Tietojen tallentaminen</h2>
@@ -21,7 +21,7 @@ Nimi: <input type="text" name="name">
   <li> Imetys: <p>
 <form action="/addbrfeed" method="POST">
 Nimi: <input type="text" name="name"><p>
-Päivämäärä: <input type="text" name="date"> <p> (muodossa 'VVVV-KK-PP')
+Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
 Aloitusaika: <input type="text" name="start_time"> <p>
 Kesto: <input type="text" name="duration"> 
 <p>
@@ -30,7 +30,7 @@ Kesto: <input type="text" name="duration">
   <li> Korvike: <p>
 <form action="/addformula" method="POST">
 Nimi: <input type="text" name="name"><p>
-Päivämäärä: <input type="text" name="date"> <p> (muodossa 'VVVV-KK-PP')
+Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
 Aloitusaika: <input type="text" name="start_time"> <p>
 Määrä: <input type="text" name="amount">    
 <p>
@@ -41,7 +41,7 @@ Määrä: <input type="text" name="amount">
 Nimi: <input type="text" name="name"><p>
 Ruoka:  <input type="text" name="food"> <p>
 Määrä (grammaa): <input type="text" name="<amount"> <p>
-Päivämäärä: <input type="text" name="date"> <p> (muodossa 'VVVV-KK-PP')
+Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
 Aloitusaika: <input type="text" name="start_time">    
 <p>
 <input type="submit" value="Lisää" <br>
@@ -51,7 +51,7 @@ Aloitusaika: <input type="text" name="start_time">
 Nimi: <input type="text" name="name"><p>
 Sisältö: <br>
 <input type="radio" name="diaper" value="pissa" checked> pissa <input type="radio" name="diaper" value="kakka"> kakka <p>
-Päivämäärä: <input type="text" name="date"> <p> (muodossa 'VVVV-KK-PP')
+Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
 Kellonaika: <input type="text" name="start_time">   
 <p>
 <input type="submit" value="Lisää" <br>
