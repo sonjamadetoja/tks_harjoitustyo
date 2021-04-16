@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> Etusivu </h2>
+
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <p>
@@ -12,3 +16,5 @@
 {% else %}
 Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
 {% endif %}
+
+{% endblock %}

@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block content %}
+
 Kirjoita haluamasi käyttäjätunnus ja salasana.
 <p>
+
 <form action="/register" method="post">
 Käyttäjätunnus: <input type="text" name="name">
 <p>
 Salasana: <input type="password" name="password">
 <p>
+Salasana uudelleen: <input type="password2" name="password2">
+<p>
 
 <input type="Submit" value="Luo käyttäjätunnus">
 </form>
+
 <p>
 <a href="/login">Palaa takaisin kirjautumissivulle</a>
+
+{% endblock %}

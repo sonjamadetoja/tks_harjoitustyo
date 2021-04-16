@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<h1>Tietojen tallentaminen</h1>
-<h2>Lisää vauva</h2>
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Tietojen tallentaminen</h2>
+<h3>Lisää vauva</h3>
 <p>
 <form action="/addbaby" method="POST">
 Nimi: <input type="text" name="name">
@@ -8,7 +10,7 @@ Nimi: <input type="text" name="name">
 <input type="submit" value="Lisää">
 </form>
 <p>
-<h2>Lisää vauvan tietoja</h2>
+<h3>Lisää vauvan tietoja</h3>
 <ul>
   <li> Imetys: <p>
 <form action="/addbrfeed" method="POST">
@@ -59,3 +61,7 @@ Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP')
 </form>
 </ul>
 <p>
+<a href="/logout">Kirjaudu ulos</a>
+<p>
+
+{% endblock %}
