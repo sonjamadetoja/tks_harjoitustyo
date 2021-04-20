@@ -35,3 +35,29 @@ def addbrfeed(name, date, time, duration):
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "time":time, "duration":duration})
     db.session.commit()
     return True
+
+def addformula(name, date, time, amount):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT id FROM babies WHERE name=:name"
+    result = db.session.execute(sql, {"name":name})
+    baby_id = result.fetchone()
+    baby_id = baby_id[0]
+    sql = " INSERT INTO formula (baby_id, date, time, amount_ml) VALUES (:baby_id, :date, :time, :amount)"
+    db.session.execute(sql, {"baby_id":baby_id, "date":date, "time":time, "amount":amount})
+    db.session.commit()
+    return True
+
+def addsolid(name, date, time, amount, food):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT id FROM babies WHERE name=:name"
+    result = db.session.execute(sql, {"name":name})
+    baby_id = result.fetchone()
+    baby_id = baby_id[0]
+    sql = "INSERT INTO solid (baby_id, date, time, amount_gr, food) VALUES (:baby_id, :date, :time, :amount, :food)"
+    db.session.execute(sql, {"baby_id":baby_id, "date":date, "time":time, "amount":amount, "food":food})
+    db.session.commit()
+    return True

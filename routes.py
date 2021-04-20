@@ -51,7 +51,7 @@ def add():
 def addbaby():
     name = request.form["name"]
     if content.addbaby(name):
-        return redirect("/main")
+        return redirect("/add")
     else:
         return render_template("error.html", message="routes/addbaby")
 
@@ -61,7 +61,7 @@ def addweight():
     weight = request.form["weight"]
     date = request.form["date"]
     if content.addweight(name, weight, date):
-        return redirect("/main")
+        return redirect("/add")
     else: 
         return render_template("error.html", message="routes/addweight")
 
@@ -72,6 +72,29 @@ def addbrfeed():
     start_time = request.form["start_time"]
     duration = request.form["duration"]
     if content.addbrfeed(name, date, start_time, duration):
-        return redirect("/main")
+        return redirect("/add")
     else: 
         return render_template("error.html", message="routes/addbrfeed")
+
+@app.route("/addformula", methods=["post"])
+def addformula():
+    name = request.form["name"]
+    date = request.form["date"]
+    start_time = request.form["start_time"]
+    amount = request.form["amount"]
+    if content.addformula(name, date, start_time, amount):
+        return redirect("/add")
+    else: 
+        return render_template("error.html", message="routes/addformula")
+
+@app.route("/addsolid", methods=["post"])
+def addsolid():
+    name = request.form["name"]
+    food = request.form["food"]
+    amount = request.form["amount"]
+    date = request.form["date"]
+    start_time = request.form["start_time"]
+    if content.addsolid(name, date, start_time, amount, food):
+        return redirect("/add")
+    else: 
+        return render_template("error.html", message="routes/addsolid")
