@@ -61,3 +61,20 @@ def addsolid(name, date, time, amount, food):
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "time":time, "amount":amount, "food":food})
     db.session.commit()
     return True
+
+def adddiaper(name, date, time, diaper_content):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT id FROM babies WHERE name=:name"
+    result = db.session.execute(sql, {"name":name})
+    baby_id = result.fetchone()
+    baby_id = baby_id[0]
+    sql = "SELECT id FROM diaper_content WHERE name=:diaper_content"
+    result = db.session.execute(sql, {"diaper_content":diaper_content})
+    diaper_content_id = result.fetchone()
+    diaper_content_id = diaper_content_id[0]
+    sql = "INSERT INTO diapers (baby_id, date, time, diaper_content_id) VALUES (:baby_id, :date, :time, :diaper_content_id)"
+    db.session.execute(sql, {"baby_id":baby_id, "date":date, "time":time, "diaper_content_id":diaper_content_id})
+    db.session.commit()
+    return True

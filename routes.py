@@ -98,3 +98,14 @@ def addsolid():
         return redirect("/add")
     else: 
         return render_template("error.html", message="routes/addsolid")
+
+@app.route("/adddiaper", methods=["post"])
+def adddiaper():
+    name = request.form["name"]
+    diaper_content = request.form["diaper"]
+    date = request.form["date"]
+    time = request.form["time"]
+    if content.adddiaper(name, date, time, diaper_content):
+        return redirect("/add")
+    else: 
+        return render_template("error.html", message="routes/adddiaper")
