@@ -21,12 +21,14 @@ def register():
         username = request.form["name"]
         password = request.form["password"]
         password2 = request.form["password2"]
+        if users.getuser(username):
+            return render_template("error.html", message="Tämä käyttäjänimi on jo käytössä.")
         if password != password2:
             return render_template("error.html", message="Salasanat eivät täsmää.")
         if users.register(username, password):
             return redirect("/main")
         else:
-            return render_template("error.html", message="routes/register")
+            return render_template("error.html", message="Rekisteröityminen ei onnistunut.")
 
 @app.route("/login", methods=["get", "post"])
 def login():
@@ -39,7 +41,7 @@ def login():
         if users.login(username,password):
             return redirect("/main")
         else:
-            return render_template("error.html", message="routes/login")
+            return render_template("error.html", message="Sisäänkirjautuminen ei onnistunut. Tarkista tunnus ja salasana.")
 
 @app.route("/logout")
 def logout():
@@ -60,7 +62,7 @@ def addbaby():
     if content.addbaby(name):
         return redirect("/add")
     else:
-        return render_template("error.html", message="routes/addbaby")
+        return render_template("error.html", message="Vauvan lisääminen ei onnistunut.")
 
 @app.route("/addweight", methods=["post"])
 def addweight():
@@ -70,7 +72,7 @@ def addweight():
     if content.addweight(name, weight, date):
         return redirect("/add")
     else: 
-        return render_template("error.html", message="routes/addweight")
+        return render_template("error.html", message="Painon lisääminen ei onnistunut.")
 
 @app.route("/addbrfeed", methods=["post"])
 def addbrfeed():
@@ -82,7 +84,7 @@ def addbrfeed():
     if content.addbrfeed(name, date, duration):
         return redirect("/add")
     else: 
-        return render_template("error.html", message="routes/addbrfeed")
+        return render_template("error.html", message="Imetyksen lisääminen ei onnistunut.")
 
 @app.route("/addformula", methods=["post"])
 def addformula():
@@ -94,7 +96,7 @@ def addformula():
     if content.addformula(name, date, amount):
         return redirect("/add")
     else: 
-        return render_template("error.html", message="routes/addformula")
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut.")
 
 @app.route("/addsolid", methods=["post"])
 def addsolid():
@@ -107,7 +109,7 @@ def addsolid():
     if content.addsolid(name, date, amount, food):
         return redirect("/add")
     else: 
-        return render_template("error.html", message="routes/addsolid")
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut.")
 
 @app.route("/adddiaper", methods=["post"])
 def adddiaper():
@@ -119,7 +121,7 @@ def adddiaper():
     if content.adddiaper(name, date, diaper_content):
         return redirect("/add")
     else: 
-        return render_template("error.html", message="routes/adddiaper")
+        return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut.")
 
 @app.route("/browse")
 def browse():
@@ -158,26 +160,3 @@ def search():
         tpl = "Pvm: "+row[0].strftime('%d.%m.%Y') + ", paino: "+str(row[1])+" g"
         weight.append(tpl)
     return render_template("result.html", query=query, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers)
-
-"""
-@app.route("/getbrfeed", methods=["get"])
-def getbrfeed():
-    query = request.args["query"]
-    list = content.getbrfeed(query)
-    new_list = []
-    for row in list:
-        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", kesto: "+row[1]+"min"
-        new_list.append(tpl)
-    return render_template("result.html", query=query, list=new_list)
-
-@app.route("/getformula", methods=["get"])
-def getformula():
-    query = request.args["query"]
-    list = content.getformula(query)
-    new_list = []
-    for row in list:
-        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", määrä: "+row[1]+"ml"
-        new_list.append(tpl)
-    
-    return render_template("result.html", query=query, list=new_list)
- """

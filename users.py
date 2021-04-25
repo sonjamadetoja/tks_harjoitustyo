@@ -3,6 +3,15 @@ from flask import abort, request, session, render_template
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 
+def getuser(name):
+    sql = "SELECT password, id FROM users WHERE name=:name"
+    result = db.session.execute(sql, {"name":name})
+    user = result.fetchone()
+    if user == None:
+        return False
+    else:
+        return True
+
 def login(name,password):
     sql = "SELECT password, id FROM users WHERE name=:name"
     result = db.session.execute(sql, {"name":name})
@@ -23,7 +32,6 @@ def logout():
 def user_id():
     return session.get("user_id",0)
 
-
 def register(name,password):
     hash_value = generate_password_hash(password)
     try:
@@ -31,6 +39,6 @@ def register(name,password):
         db.session.execute(sql, {"name":name,"password":hash_value})
         db.session.commit()
     except:
-        return render_template("error.html", message="users/register")
+        return render_template("error.html", message="Rekisteröityminen ei onnistunut.")
     return login(name,password)
 
