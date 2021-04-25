@@ -25,6 +25,8 @@ def register():
             return render_template("error.html", message="Tämä käyttäjänimi on jo käytössä.")
         if password != password2:
             return render_template("error.html", message="Salasanat eivät täsmää.")
+        if len(password) < 13:
+            return render_template("error.html", message="Antamasi salasana on liian lyhyt. Salasanan tulee olla vähintään 13 merkkiä pitkä.")
         if users.register(username, password):
             return redirect("/main")
         else:
