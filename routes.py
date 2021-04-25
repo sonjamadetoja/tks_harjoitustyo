@@ -83,6 +83,8 @@ def addbrfeed():
     start_time = request.form["start_time"]
     date = date + " " + start_time
     duration = request.form["duration"]
+    if int(duration) < 0:
+        return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska antamasi kesto on alle 0 minuuttia.")
     if content.addbrfeed(name, date, duration):
         return redirect("/add")
     else: 
@@ -95,6 +97,8 @@ def addformula():
     start_time = request.form["start_time"]
     date = date + " " + start_time
     amount = request.form["amount"]
+    if int(amount) < 0:
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
     if content.addformula(name, date, amount):
         return redirect("/add")
     else: 
@@ -108,6 +112,8 @@ def addsolid():
     date = request.form["date"]
     start_time = request.form["start_time"]
     date = date + " " + start_time
+    if int(amount) < 0:
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
     if content.addsolid(name, date, amount, food):
         return redirect("/add")
     else: 
