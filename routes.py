@@ -2,6 +2,13 @@ from app import app
 from flask import redirect, render_template, request, session
 import db, content, users
 
+from jinja2 import Environment, PackageLoader, select_autoescape
+env = Environment(
+    loader=PackageLoader('app', 'templates'),
+    autoescape=select_autoescape(['html', 'xml'])
+)
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -70,8 +77,9 @@ def addbrfeed():
     name = request.form["name"]
     date = request.form["date"]
     start_time = request.form["start_time"]
+    date = date + " " + start_time
     duration = request.form["duration"]
-    if content.addbrfeed(name, date, start_time, duration):
+    if content.addbrfeed(name, date, duration):
         return redirect("/add")
     else: 
         return render_template("error.html", message="routes/addbrfeed")
@@ -81,8 +89,9 @@ def addformula():
     name = request.form["name"]
     date = request.form["date"]
     start_time = request.form["start_time"]
+    date = date + " " + start_time
     amount = request.form["amount"]
-    if content.addformula(name, date, start_time, amount):
+    if content.addformula(name, date, amount):
         return redirect("/add")
     else: 
         return render_template("error.html", message="routes/addformula")
@@ -94,7 +103,8 @@ def addsolid():
     amount = request.form["amount"]
     date = request.form["date"]
     start_time = request.form["start_time"]
-    if content.addsolid(name, date, start_time, amount, food):
+    date = date + " " + start_time
+    if content.addsolid(name, date, amount, food):
         return redirect("/add")
     else: 
         return render_template("error.html", message="routes/addsolid")
@@ -105,7 +115,69 @@ def adddiaper():
     diaper_content = request.form["diaper"]
     date = request.form["date"]
     time = request.form["time"]
-    if content.adddiaper(name, date, time, diaper_content):
+    date = date + " " + time
+    if content.adddiaper(name, date, diaper_content):
         return redirect("/add")
     else: 
         return render_template("error.html", message="routes/adddiaper")
+
+@app.route("/browse")
+def browse():
+    list = content.getbaby()
+    new_list = []
+    for row in list:
+        new_list.append(row[0])
+    return render_template("browse.html", list=new_list)
+
+@app.route("/search", methods=["get"])
+def search():
+    query = request.args["query"]
+    list = content.getbrfeed(query)
+    brfeed = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", kesto: "+row[1]+" min"
+        brfeed.append(tpl)
+    list = content.getformula(query)
+    formula = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", määrä: "+str(row[1])+" ml"
+        formula.append(tpl)
+    list = content.getsolid(query)
+    solid = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", määrä: "+str(row[1])+" g" + ", ruoka: " + row[2]
+        solid.append(tpl)
+    list = content.getdiaper(query)
+    diapers = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y') + ", sisältö: "+str(row[1])
+        diapers.append(tpl)
+    list = content.getweight(query)
+    weight = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y') + ", paino: "+str(row[1])+" g"
+        weight.append(tpl)
+    return render_template("result.html", query=query, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers)
+
+"""
+@app.route("/getbrfeed", methods=["get"])
+def getbrfeed():
+    query = request.args["query"]
+    list = content.getbrfeed(query)
+    new_list = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", kesto: "+row[1]+"min"
+        new_list.append(tpl)
+    return render_template("result.html", query=query, list=new_list)
+
+@app.route("/getformula", methods=["get"])
+def getformula():
+    query = request.args["query"]
+    list = content.getformula(query)
+    new_list = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", määrä: "+row[1]+"ml"
+        new_list.append(tpl)
+    
+    return render_template("result.html", query=query, list=new_list)
+ """

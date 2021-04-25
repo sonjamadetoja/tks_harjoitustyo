@@ -1,0 +1,81 @@
+
+{% extends "layout.html" %}
+{% block content %}
+
+
+{% if session.user_id %}
+<p>Olet kirjautunut nimellä {{ session.username }}. <a href="/logout">Kirjaudu ulos
+<p>
+<a href="/browse"> Palaa hakusivulle </a> <p>
+<a href="/main"> Palaa etusivulle </a>
+<p>
+
+<h2>Vauvan tiedot</h2>
+
+Vauva:
+<b> {{ query }} </b> <p>
+Tiedot:
+<TABLE>
+   <TR>
+      <TD> <b> Imetykset </b> </TD>
+   </TR>
+{% for i in brfeed %}
+   <TR>
+      <TD> {{ i }} </TD>
+   </TR>
+{% endfor %}
+</TABLE>
+
+<TABLE>
+   <TR>
+      <TD> <b> Korvike </b> </TD>
+   </TR>
+{% for i in formula %}
+   <TR>
+      <TD> {{ i }} </TD>
+   </TR>
+{% endfor %}
+</TABLE>
+
+<TABLE>
+   <TR>
+      <TD> <b> Kiinteä ruoka </b> </TD>
+   </TR>
+{% for i in solid %}
+   <TR>
+      <TD> {{ i }} </TD>
+   </TR>
+{% endfor %}
+</TABLE>
+
+<TABLE>
+   <TR>
+      <TD> <b> Vaippa </b> </TD>
+   </TR>
+{% for i in diapers %}
+   <TR>
+      <TD> {{ i }} </TD>
+   </TR>
+{% endfor %}
+</TABLE>
+
+<TABLE>
+   <TR>
+      <TD> <b> Paino </b> </TD>
+   </TR>
+{% for i in weight %}
+   <TR>
+      <TD> {{ i }} </TD>
+   </TR>
+{% endfor %}
+</TABLE>
+
+{% else %}
+Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
+{% endif %}
+
+{% endblock %}
+
+
+
+

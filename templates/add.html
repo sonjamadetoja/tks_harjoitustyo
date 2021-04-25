@@ -21,18 +21,18 @@ Nimi: <input type="text" name="name">
   <li> Imetys: <p>
 <form action="/addbrfeed" method="POST">
 Nimi: <input type="text" name="name"><p>
-Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
-Aloitusaika: <input type="text" name="start_time"> (muodossa 'mm:ss') <p> 
-Kesto (minuuttia): <input type="text" name="duration"> 
+Päivämäärä: <input type="date" name="date"> <p>
+Aloitusaika: <input type="time" name="start_time"> <p> 
+Kesto (minuuttia): <input type="number" name="duration"> 
 <p>
 <input type="submit" value="Lisää" <br>
 </form>
   <li> Korvike: <p>
 <form action="/addformula" method="POST">
 Nimi: <input type="text" name="name"><p>
-Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
-Aloitusaika: <input type="text" name="start_time"> (muodossa 'mm:ss') <p>
-Määrä: <input type="text" name="amount">    
+Päivämäärä: <input type="date" name="date"> <p>
+Aloitusaika: <input type="time" name="start_time">  <p>
+Määrä (ml): <input type="number" name="amount">    
 <p>
 <input type="submit" value="Lisää" <br>
 </form>
@@ -40,9 +40,9 @@ Määrä: <input type="text" name="amount">
 <form action="/addsolid" method="POST">
 Nimi: <input type="text" name="name"><p>
 Ruoka:  <input type="text" name="food"> <p>
-Määrä (grammaa): <input type="text" name="amount"> <p>
-Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
-Aloitusaika: <input type="text" name="start_time"> (muodossa 'mm:ss') 
+Määrä (grammaa): <input type="number" name="amount"> <p>
+Päivämäärä: <input type="date" name="date"> <p>
+Aloitusaika: <input type="time" name="start_time"> 
 <p>
 <input type="submit" value="Lisää" <br>
 </form>
@@ -51,8 +51,8 @@ Aloitusaika: <input type="text" name="start_time"> (muodossa 'mm:ss')
 Nimi: <input type="text" name="name"><p>
 Sisältö: <br>
 <input type="radio" name="diaper" value="pissa" checked> pissa <input type="radio" name="diaper" value="kakka"> kakka <p>
-Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP') <p>
-Kellonaika: <input type="text" name="time"> (muodossa 'mm:ss') 
+Päivämäärä: <input type="date" name="date">  <p>
+Kellonaika: <input type="time" name="time">  
 <p>
 <input type="submit" value="Lisää" <br>
 </form>
@@ -60,8 +60,8 @@ Kellonaika: <input type="text" name="time"> (muodossa 'mm:ss')
 <p>
 <form action="/addweight" method="POST">
 Nimi: <input type="text" name="name"><p>
-Paino (grammaa):  <input type="text" name="weight"> <p>
-Päivämäärä: <input type="text" name="date"> (muodossa 'VVVV-KK-PP')
+Paino (grammaa):  <input type="number" name="weight"> <p>
+Päivämäärä: <input type="date" name="date"> 
 <p>
 <input type="submit" value="Lisää" <br>
 </form>
