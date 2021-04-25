@@ -20,7 +20,13 @@ Nimi: <input type="text" name="name">
 <ul>
   <li> Imetys: <p>
 <form action="/addbrfeed" method="POST">
-Nimi: <input type="text" name="name"><p>
+Nimi: 
+<select name="name">
+{% for i in list %}
+<option value={{ i }} selected> {{ i }}
+{% endfor %}
+</select> 
+<p>
 Päivämäärä: <input type="date" name="date"> <p>
 Aloitusaika: <input type="time" name="start_time"> <p> 
 Kesto (minuuttia): <input type="number" name="duration"> 
@@ -29,7 +35,13 @@ Kesto (minuuttia): <input type="number" name="duration">
 </form>
   <li> Korvike: <p>
 <form action="/addformula" method="POST">
-Nimi: <input type="text" name="name"><p>
+Nimi: 
+<select name="name">
+{% for i in list %}
+<option value={{ i }} selected> {{ i }}
+{% endfor %}
+</select> 
+<p>
 Päivämäärä: <input type="date" name="date"> <p>
 Aloitusaika: <input type="time" name="start_time">  <p>
 Määrä (ml): <input type="number" name="amount">    
@@ -38,7 +50,13 @@ Määrä (ml): <input type="number" name="amount">
 </form>
   <li> Kiinteä ruoka <p>
 <form action="/addsolid" method="POST">
-Nimi: <input type="text" name="name"><p>
+Nimi: 
+<select name="name">
+{% for i in list %}
+<option value={{ i }} selected> {{ i }}
+{% endfor %}
+</select> 
+<p>
 Ruoka:  <input type="text" name="food"> <p>
 Määrä (grammaa): <input type="number" name="amount"> <p>
 Päivämäärä: <input type="date" name="date"> <p>
@@ -48,7 +66,13 @@ Aloitusaika: <input type="time" name="start_time">
 </form>
   <li> Vaipat <p>
 <form action="/adddiaper" method="POST">
-Nimi: <input type="text" name="name"><p>
+Nimi: 
+<select name="name">
+{% for i in list %}
+<option value={{ i }} selected> {{ i }}
+{% endfor %}
+</select> 
+<p>
 Sisältö: <br>
 <input type="radio" name="diaper" value="pissa" checked> pissa <input type="radio" name="diaper" value="kakka"> kakka <p>
 Päivämäärä: <input type="date" name="date">  <p>
@@ -59,7 +83,13 @@ Kellonaika: <input type="time" name="time">
   <li> Paino
 <p>
 <form action="/addweight" method="POST">
-Nimi: <input type="text" name="name"><p>
+Nimi: 
+<select name="name">
+{% for i in list %}
+<option value={{ i }} selected> {{ i }}
+{% endfor %}
+</select> 
+<p>
 Paino (grammaa):  <input type="number" name="weight"> <p>
 Päivämäärä: <input type="date" name="date"> 
 <p>
