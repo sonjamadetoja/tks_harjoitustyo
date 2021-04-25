@@ -56,13 +56,21 @@ def main():
 
 @app.route("/add")
 def add():
-    return render_template("add.html")
+    list = content.getbaby()
+    new_list = []
+    for row in list:
+        new_list.append(row[0])
+    return render_template("add.html", list=new_list)
+
+@app.route("/addsuccess")
+def addsuccess():
+    return render_template("addsuccess.html")
 
 @app.route("/addbaby", methods=["post"])
 def addbaby():
     name = request.form["name"]
     if content.addbaby(name):
-        return redirect("/add")
+        return redirect("/addsuccess")
     else:
         return render_template("error.html", message="Vauvan lisääminen ei onnistunut.")
 
@@ -72,7 +80,7 @@ def addweight():
     weight = request.form["weight"]
     date = request.form["date"]
     if content.addweight(name, weight, date):
-        return redirect("/add")
+        return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Painon lisääminen ei onnistunut.")
 
@@ -86,7 +94,7 @@ def addbrfeed():
     if int(duration) < 0:
         return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska antamasi kesto on alle 0 minuuttia.")
     if content.addbrfeed(name, date, duration):
-        return redirect("/add")
+        return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Imetyksen lisääminen ei onnistunut.")
 
@@ -100,7 +108,7 @@ def addformula():
     if int(amount) < 0:
         return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
     if content.addformula(name, date, amount):
-        return redirect("/add")
+        return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut.")
 
@@ -115,7 +123,7 @@ def addsolid():
     if int(amount) < 0:
         return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
     if content.addsolid(name, date, amount, food):
-        return redirect("/add")
+        return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut.")
 
@@ -127,7 +135,7 @@ def adddiaper():
     time = request.form["time"]
     date = date + " " + time
     if content.adddiaper(name, date, diaper_content):
-        return redirect("/add")
+        return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut.")
 
