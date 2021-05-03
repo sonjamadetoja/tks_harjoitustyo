@@ -64,7 +64,7 @@ def add():
 
 @app.route("/addsuccess")
 def addsuccess():
-    return render_template("addsuccess.html")
+    return render_template("addsuccess.html"). 
 
 @app.route("/addbaby", methods=["post"])
 def addbaby():
@@ -138,6 +138,19 @@ def adddiaper():
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut.")
+
+@app.route("/addmessage", methods=["post"])
+def addmessage():
+    name = request.form["name"]
+    date = request.form["date"]
+    message = request.form["message"]
+    date = datetime.datetime.now()
+    if len(message) > 300:
+        return render_template("error.html", message="Viestin lisääminen ei onnistunut, koska viesti on liian pitkä. Viestin tulee olla korkeintaan 300 merkin pituinen.")
+    if content.addmessage(name, date, message):
+        return redirect("/addsuccess")
+    else: 
+        return render_template("error.html", message="Viestin lisääminen ei onnistunut.")
 
 @app.route("/browse")
 def browse():

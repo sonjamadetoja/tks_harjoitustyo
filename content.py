@@ -78,7 +78,20 @@ def adddiaper(name, date, diaper_content):
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "diaper_content_id":diaper_content_id})
     db.session.commit()
     return True
-    
+
+def addmessages(name, date, message):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT id FROM babies WHERE name=:name"
+    result = db.session.execute(sql, {"name":name})
+    baby_id = result.fetchone()
+    baby_id = baby_id[0]
+    sql = "INSERT INTO messages (baby_id, date, content) VALUES (:baby_id, :date, :message)"
+    db.session.execute(sql, {"baby_id":baby_id, "date":date, "message":message})
+    db.session.commit()
+    return True
+
 def getbaby():
     user_id = users.user_id()
     if user_id == 0:

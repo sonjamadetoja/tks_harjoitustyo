@@ -95,6 +95,24 @@ Päivämäärä: <input type="date" name="date">
 <p>
 <input type="submit" value="Lisää" <br>
 </form>
+
+
+  <li> Viesti
+<p>
+<form action="/addmessage" method="POST">
+Nimi: 
+<select name="name">
+{% for i in list %}
+<option value={{ i }} selected> {{ i }}
+{% endfor %}
+</select> 
+<p>
+Viesti: <p>
+<textarea name="message" rows="6" cols="50">
+</textarea> <p>
+<input type="submit" value="Lisää">
+</form>
+
 </ul>
 {% else %}
 Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
