@@ -1,6 +1,7 @@
 from app import app
 from flask import redirect, render_template, request, session
 import db, content, users
+import datetime
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 env = Environment(
@@ -142,7 +143,6 @@ def adddiaper():
 @app.route("/addmessage", methods=["post"])
 def addmessage():
     name = request.form["name"]
-    date = request.form["date"]
     message = request.form["message"]
     date = datetime.datetime.now()
     if len(message) > 300:

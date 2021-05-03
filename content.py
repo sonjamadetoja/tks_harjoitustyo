@@ -79,7 +79,7 @@ def adddiaper(name, date, diaper_content):
     db.session.commit()
     return True
 
-def addmessages(name, date, message):
+def addmessage(name, date, message):
     user_id = users.user_id()
     if user_id == 0:
         return False
