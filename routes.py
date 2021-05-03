@@ -64,7 +64,7 @@ def add():
 
 @app.route("/addsuccess")
 def addsuccess():
-    return render_template("addsuccess.html"). 
+    return render_template("addsuccess.html")
 
 @app.route("/addbaby", methods=["post"])
 def addbaby():
