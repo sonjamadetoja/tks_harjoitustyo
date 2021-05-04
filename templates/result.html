@@ -70,6 +70,17 @@ Tiedot:
 {% endfor %}
 </TABLE>
 
+<TABLE>
+   <TR>
+      <TD> <b> Viestit </b> </TD>
+   </TR>
+{% for i in messages %}
+   <TR>
+      <TD> {{ i }} </TD>
+   </TR>
+{% endfor %}
+</TABLE>
+
 {% else %}
 Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
 {% endif %}

@@ -159,3 +159,15 @@ def getweight(query):
     sql = "SELECT date, weight FROM weight WHERE baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
+
+def getmessage(query):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT id FROM babies WHERE name=:query"
+    result = db.session.execute(sql, {"query":query})
+    baby_id = result.fetchone()
+    baby_id = baby_id[0]
+    sql = "SELECT date, content FROM messages WHERE baby_id=:baby_id ORDER BY date"
+    result = db.session.execute(sql, {"baby_id":baby_id})
+    return result.fetchall()

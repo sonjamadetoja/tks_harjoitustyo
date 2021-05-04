@@ -188,4 +188,10 @@ def search():
     for row in list:
         tpl = "Pvm: "+row[0].strftime('%d.%m.%Y') + ", paino: "+str(row[1])+" g"
         weight.append(tpl)
-    return render_template("result.html", query=query, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers)
+    list = content.getmessage(query)
+    messages = []
+    for row in list:
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", " + "Viesti: "+str(row[1])
+        messages.append(tpl)
+    return render_template("result.html", query=query, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers, messages=messages)
+
