@@ -1,4 +1,4 @@
-CREATE TABLE babies (id SERIAL PRIMARY KEY, name TEXT UNIQUE, user_id INTEGER REFERENCES users);
+CREATE TABLE babies (id SERIAL PRIMARY KEY, name TEXT, user_id INTEGER REFERENCES users);
 
 CREATE TABLE breastfeeding (id SERIAL PRIMARY KEY, baby_id INTEGER REFERENCES babies, date TIMESTAMP, duration TEXT);
 
