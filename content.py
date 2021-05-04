@@ -115,7 +115,7 @@ def getbaby():
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT B.name FROM babies AS B, rights AS R WHERE (B.user_id = R.babyowner_user_id AND B.id = R.baby_id AND R.babywatcher_user_id=:user_id) OR B.user_id = :user_id;"
+    sql = "SELECT B.name FROM babies AS B JOIN rights AS R ON B.user_id = R.babyowner_user_id AND B.id = R.baby_id AND R.babywatcher_user_id=:user_id UNION SELECT name FROM babies WHERE user_id=:user_id;"
     baby = db.session.execute(sql, {"user_id":user_id})
     return baby.fetchall()
 
