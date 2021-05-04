@@ -9,7 +9,6 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -151,6 +150,30 @@ def addmessage():
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Viestin lisääminen ei onnistunut.")
+
+@app.route("/addrights")
+def addrights():
+    user = request.form["query_user"]
+    list = request.form.get("baby", allow_multiple=True)
+    baby_list = []
+    for row in list:
+        baby_list.append(row[0])
+    if content.addrights(user, baby_list):
+        return render_template("rightssuccess.html")
+    else:
+        return render_template("error.html", message="Oikeuksien myöntäminen ei onnistunut.")
+
+@app.route("/rights")
+def rights():
+    list = content.getuser()
+    user_list = []
+    for row in list:
+        user_list.append(row[0])
+    list = content.getbaby()
+    baby_list = []
+    for row in list:
+        baby_list.append(row[0])
+    return render_template("rights.html", user_list=user_list, baby_list=baby_list)
 
 @app.route("/browse")
 def browse():

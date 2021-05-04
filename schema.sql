@@ -15,3 +15,5 @@ CREATE TABLE weight (id SERIAL PRIMARY KEY, baby_id INTEGER REFERENCES babies, d
 CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT UNIQUE, password TEXT);
 
 CREATE TABLE messages (id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users, baby_id INTEGER REFERENCES babies, date TIMESTAMP, content TEXT);
+
+CREATE TABLE rights (id SERIAL PRIMARY KEY, babyowner_user_id Integer REFERENCES users, babywatcher_user_id Integer REFERENCES users, baby_id INTEGER REFERENCES babies);

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> Oikeudet </h2>
+
+{% if session.user_id %}
+<p>Olet kirjautunut nimellä {{ session.username }}. <a href="/logout">Kirjaudu ulos</a>
+<p>
+    <a href="/main"> Palaa etusivulle </a>
+    <p>
+<br>
+Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tietoja.
+
+<form action="/addrights" method="GET">
+    <p>
+    Valitse käyttäjä:
+    <select name="query_user">
+    {% for i in user_list %}
+    <option value={{ i }} selected> {{ i }}
+    {% endfor %}
+    </select>
+    <p>
+    Valitse vauva:
+    {% for i in baby_list %}
+    <input type="checkbox" id="baby" name=baby value={{ i }}>
+    <label for="baby"> {{ i }}</label>
+    {% endfor %}
+    <p>
+    Voit valita niin monta lasta kuin haluat.
+    <p>
+    <input type="submit" value="Anna oikeus">
+    
+    </form>
+
+{% else %}
+Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
+{% endif %}
+
+{% endblock %}

@@ -92,13 +92,40 @@ def addmessage(name, date, message):
     db.session.commit()
     return True
 
+def addrights(user, baby_list):
+    babyowner_user_id = users.user_id()
+    if babyowner_user_id == 0:
+        return False
+    sql = "SELECT id FROM users WHERE name=:user"
+    result = db.session.execute(sql, {"user":users})
+    babywatcher_user_id = result.fetchone()
+    babywatcher_user_id = babywatcher_user_id[0]
+    for row in baby_list:
+        name = row[0]
+        sql = "SELECT id FROM babies WHERE name=:name"
+        result = db.session.execute(sql, {"name":name})
+        baby_id = result.fetchone()
+        baby_id = baby_id[0]
+        sql = "INSERT INTO rights (babyowner_user_id, babywatcher_user_id, baby_id) VALUES (:babyowner_user_id, :babywatcher_user_id, :baby_id)"
+        db.session.execute(sql, {"babyowner_user_id":babyowner_user_id, "babywatcher_user_id":babywatcher_user_id, "baby_id":baby_id})
+        db.session.commit()
+        return True
+
 def getbaby():
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT name FROM babies WHERE user_id=:user_id"
+    sql = "SELECT B.name FROM babies AS B, rights AS R WHERE B.user_id=:user_id OR R.babywatcher_user_id=:user_id AND R.baby_id=B.id"
     baby = db.session.execute(sql, {"user_id":user_id})
     return baby.fetchall()
+
+def getuser():
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT name FROM users"
+    names = db.session.execute(sql)
+    return names.fetchall()
 
 def getbrfeed(query):
     user_id = users.user_id()
