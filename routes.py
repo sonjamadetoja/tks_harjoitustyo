@@ -154,11 +154,8 @@ def addmessage():
 @app.route("/addrights")
 def addrights():
     user = request.form["query_user"]
-    list = request.form.get("baby", allow_multiple=True)
-    baby_list = []
-    for row in list:
-        baby_list.append(row[0])
-    if content.addrights(user, baby_list):
+    name = request.form["name"]
+    if content.addrights(user, name):
         return render_template("rightssuccess.html")
     else:
         return render_template("error.html", message="Oikeuksien myöntäminen ei onnistunut.")

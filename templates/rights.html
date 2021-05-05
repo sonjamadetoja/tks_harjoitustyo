@@ -21,12 +21,11 @@ Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tiet
     </select>
     <p>
     Valitse vauva:
-    {% for i in baby_list %}
-    <input type="checkbox" id="baby" name=baby value={{ i }}>
-    <label for="baby"> {{ i }}</label>
-    {% endfor %}
-    <p>
-    Voit valita niin monta lasta kuin haluat.
+    <select name="name">
+        {% for i in baby_list %}
+        <option value={{ i }} selected> {{ i }}
+        {% endfor %}
+    </select>
     <p>
     <input type="submit" value="Anna oikeus">
     
