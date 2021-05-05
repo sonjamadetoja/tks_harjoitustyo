@@ -97,7 +97,7 @@ def addrights(user, name):
     if babyowner_user_id == 0:
         return False
     sql = "SELECT id FROM users WHERE name=:user"
-    result = db.session.execute(sql, {"user":users})
+    result = db.session.execute(sql, {"user":user})
     babywatcher_user_id = result.fetchone()
     babywatcher_user_id = babywatcher_user_id[0]
     sql = "SELECT id FROM babies WHERE name=:name"

@@ -23,10 +23,16 @@ def register():
         password2 = request.form["password2"]
         if users.getuser(username):
             return render_template("error.html", message="Tämä käyttäjänimi on jo käytössä.")
+        if len(username) == 0:
+            return render_template("error.html", message="Et antanut tunnusta.")
         if password != password2:
             return render_template("error.html", message="Salasanat eivät täsmää.")
         if len(password) < 13:
             return render_template("error.html", message="Antamasi salasana on liian lyhyt. Salasanan tulee olla vähintään 13 merkkiä pitkä.")
+        if len(password) > 50:
+            return render_template("error.html", message="Antamasi salasana on liian pitkä. Salasanan tulee olla enintään 50 merkkiä pitkä.")
+        if len(username) > 50:
+            return render_template("error.html", message="Antamasi käyttäjätunnus on liian pitkä. Tunnuksen tulee olla enintään 50 merkkiä pitkä.")
         if users.register(username, password):
             return redirect("/main")
         else:
@@ -69,6 +75,10 @@ def addsuccess():
 @app.route("/addbaby", methods=["post"])
 def addbaby():
     name = request.form["name"]
+    if len(name) == 0:
+        return render_template("error.html", message="Et antanut vauvalle nimeä.")
+    if len(name) > 20:
+        return render_template("error.html", message="Vauvan nimi on liian pitkä. Nimen pituus tulee olla enimmillään 20 merkkiä.")
     if content.addbaby(name):
         return redirect("/addsuccess")
     else:
@@ -79,6 +89,14 @@ def addweight():
     name = request.form["name"]
     weight = request.form["weight"]
     date = request.form["date"]
+    if weight == "":
+        return render_template("error.html", message="Painon lisääminen ei onnistunut, koska et antanut painon grammamäärää.")
+    if date == "":
+        return render_template("error.html", message="Painon lisääminen ei onnistunut, koska et antanut päivämäärää.")
+    if len(weight) < 0:
+        return render_template("error.html", message="Painon lisääminen ei onnistunut, koska antamasi paino on alle 0 g.")
+    if len(weight) > 6:
+        return render_template("error.html", message="Painon lisääminen ei onnistunut, koska annoit liian suuren painomäärän.")
     if content.addweight(name, weight, date):
         return redirect("/addsuccess")
     else: 
@@ -89,10 +107,18 @@ def addbrfeed():
     name = request.form["name"]
     date = request.form["date"]
     start_time = request.form["start_time"]
+    if date == "":
+        return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska et antanut päivämäärää.")
+    if start_time == "":
+        return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska et antanut kellonaikaa.")
     date = date + " " + start_time
     duration = request.form["duration"]
+    if len(str(duration)) == 0:
+        return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska et antanut imetyksen kestoa.")
     if int(duration) < 0:
         return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska antamasi kesto on alle 0 minuuttia.")
+    if int(duration) > 1500:
+        return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska annoit imetykselle liian suuren keston. Keston tulee olla korkeintaan 1500 min.")
     if content.addbrfeed(name, date, duration):
         return redirect("/addsuccess")
     else: 
@@ -101,12 +127,20 @@ def addbrfeed():
 @app.route("/addformula", methods=["post"])
 def addformula():
     name = request.form["name"]
+    amount = request.form["amount"]
     date = request.form["date"]
     start_time = request.form["start_time"]
+    if len(str(amount)) == 0:
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska et antanut määrää.")
+    if date == "":
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska et antanut päivämäärää.")
+    if start_time == "":
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska et antanut kellonaikaa.")
     date = date + " " + start_time
-    amount = request.form["amount"]
     if int(amount) < 0:
-        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska antamasi määrä on alle 0 ml.")
+    if int(amount) > 1500:
+        return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska annoit liian suuren määrän. Määrän tulee olla korkeintaan 1500 ml.")
     if content.addformula(name, date, amount):
         return redirect("/addsuccess")
     else: 
@@ -119,9 +153,21 @@ def addsolid():
     amount = request.form["amount"]
     date = request.form["date"]
     start_time = request.form["start_time"]
+    if len(food) == 0:
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska et antanut ruuan nimeä.")
+    if date == "":
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska et antanut päivämäärää.")
+    if start_time == "":
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska et antanut kellonaikaa.")
     date = date + " " + start_time
+    if len(food) > 20:
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska ruuan nimi on liian pitkä. Nimen pituus voi olla korkeintaan 20 merkkiä.")
+    if amount == "":
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska et antanut määrää.")
     if int(amount) < 0:
         return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
+    if int(amount) > 1500:
+        return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska annoit liian suuren määrän. Määrän tulee olla korkeintaan 1500 g.")
     if content.addsolid(name, date, amount, food):
         return redirect("/addsuccess")
     else: 
@@ -133,6 +179,10 @@ def adddiaper():
     diaper_content = request.form["diaper"]
     date = request.form["date"]
     time = request.form["time"]
+    if date == "":
+        return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut, koska et antanut päivämäärää.")
+    if time == "":
+        return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut, koska et antanut kellonaikaa.")
     date = date + " " + time
     if content.adddiaper(name, date, diaper_content):
         return redirect("/addsuccess")
@@ -146,6 +196,8 @@ def addmessage():
     date = datetime.datetime.now()
     if len(message) > 300:
         return render_template("error.html", message="Viestin lisääminen ei onnistunut, koska viesti on liian pitkä. Viestin tulee olla korkeintaan 300 merkin pituinen.")
+    if len(message) == 0:
+        return render_template("error.html", message="Viestin lisääminen ei onnistunut, koska viestikenttä on tyhjä.")
     if content.addmessage(name, date, message):
         return redirect("/addsuccess")
     else: 
