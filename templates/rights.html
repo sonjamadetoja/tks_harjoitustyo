@@ -20,16 +20,17 @@ Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tiet
     {% endfor %}
     </select>
     <p>
+        
     Valitse vauva:
     <select name="name">
-        {% for i in baby_list %}
-        <option value={{ i }} selected> {{ i }}
-        {% endfor %}
+    {% for i in baby_list %}
+    <option value={{ i }} selected> {{ i }}
+    {% endfor %}
     </select>
     <p>
     <input type="submit" value="Anna oikeus">
     
-    </form>
+</form>
 
 {% else %}
 Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
