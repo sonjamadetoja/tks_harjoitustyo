@@ -88,7 +88,7 @@ def addbaby():
 def addweight():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
-    name = request.form["name"]
+    baby = request.form["baby"]
     weight = request.form["weight"]
     date = request.form["date"]
     if weight == "":
@@ -99,7 +99,7 @@ def addweight():
         return render_template("error.html", message="Painon lisääminen ei onnistunut, koska antamasi paino on alle 0 g.")
     if len(weight) > 6:
         return render_template("error.html", message="Painon lisääminen ei onnistunut, koska annoit liian suuren painomäärän.")
-    if content.addweight(name, weight, date):
+    if content.addweight(baby, weight, date):
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Painon lisääminen ei onnistunut.")
@@ -132,7 +132,7 @@ def addbrfeed():
 def addformula():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
-    name = request.form["name"]
+    baby = request.form["baby"]
     amount = request.form["amount"]
     date = request.form["date"]
     start_time = request.form["start_time"]
@@ -147,7 +147,7 @@ def addformula():
         return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska antamasi määrä on alle 0 ml.")
     if int(amount) > 1500:
         return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut, koska annoit liian suuren määrän. Määrän tulee olla korkeintaan 1500 ml.")
-    if content.addformula(name, date, amount):
+    if content.addformula(baby, date, amount):
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Korvikkeen lisääminen ei onnistunut.")
@@ -156,7 +156,7 @@ def addformula():
 def addsolid():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
-    name = request.form["name"]
+    baby = request.form["baby"]
     food = request.form["food"]
     amount = request.form["amount"]
     date = request.form["date"]
@@ -176,7 +176,7 @@ def addsolid():
         return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska antamasi määrä on alle 0.")
     if int(amount) > 1500:
         return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut, koska annoit liian suuren määrän. Määrän tulee olla korkeintaan 1500 g.")
-    if content.addsolid(name, date, amount, food):
+    if content.addsolid(baby, date, amount, food):
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Kiinteän ruuan lisääminen ei onnistunut.")
@@ -185,7 +185,7 @@ def addsolid():
 def adddiaper():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
-    name = request.form["name"]
+    baby = request.form["baby"]
     diaper_content = request.form["diaper"]
     date = request.form["date"]
     time = request.form["time"]
@@ -194,7 +194,7 @@ def adddiaper():
     if time == "":
         return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut, koska et antanut kellonaikaa.")
     date = date + " " + time
-    if content.adddiaper(name, date, diaper_content):
+    if content.adddiaper(baby, date, diaper_content):
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Vaipanvaihdon lisääminen ei onnistunut.")
@@ -203,14 +203,14 @@ def adddiaper():
 def addmessage():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
-    name = request.form["name"]
+    baby = request.form["baby"]
     message = request.form["message"]
     date = datetime.datetime.now()
     if len(message) > 300:
         return render_template("error.html", message="Viestin lisääminen ei onnistunut, koska viesti on liian pitkä. Viestin tulee olla korkeintaan 300 merkin pituinen.")
     if len(message) == 0:
         return render_template("error.html", message="Viestin lisääminen ei onnistunut, koska viestikenttä on tyhjä.")
-    if content.addmessage(name, date, message):
+    if content.addmessage(baby, date, message):
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Viestin lisääminen ei onnistunut.")
@@ -240,15 +240,13 @@ def rights():
 
 @app.route("/browse")
 def browse():
-    list = content.getbaby()
-    new_list = []
-    for row in list:
-        new_list.append(row[0])
-    return render_template("browse.html", list=new_list)
+    tpl = content.getbaby()
+    return render_template("browse.html", babies=tpl)
 
 @app.route("/search", methods=["get"])
 def search():
     query = request.args["query"]
+    name = content.getbabyname(query)[0]
     list = content.getbrfeed(query)
     brfeed = []
     for row in list:
@@ -279,5 +277,5 @@ def search():
     for row in list:
         tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", " + "Viesti: "+str(row[1])
         messages.append(tpl)
-    return render_template("result.html", query=query, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers, messages=messages)
+    return render_template("result.html", name=name, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers, messages=messages)
 

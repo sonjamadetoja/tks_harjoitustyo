@@ -14,8 +14,8 @@
 <p>
 Valitse vauva:
 <select name="query">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+{% for baby in babies %}
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select>
 <br>

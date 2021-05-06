@@ -25,7 +25,7 @@ Nimi: <input type="text" name="name">
 Nimi: 
 <select name="baby">
 {% for baby in babies %}
-<option value=baby[0] selected> baby[1]
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select> 
 <p>
@@ -36,13 +36,12 @@ Kesto (minuuttia): <input type="number" name="duration">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
-<!--
   <li> Korvike: <p>
 <form action="/addformula" method="POST">
 Nimi: 
-<select name="name">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+<select name="baby">
+{% for baby in babies %}
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select> 
 <p>
@@ -56,9 +55,9 @@ Määrä (ml): <input type="number" name="amount">
   <li> Kiinteä ruoka <p>
 <form action="/addsolid" method="POST">
 Nimi: 
-<select name="name">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+<select name="baby">
+{% for baby in babies %}
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select> 
 <p>
@@ -73,9 +72,9 @@ Aloitusaika: <input type="time" name="start_time">
   <li> Vaipat <p>
 <form action="/adddiaper" method="POST">
 Nimi: 
-<select name="name">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+<select name="baby">
+{% for baby in babies %}
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select> 
 <p>
@@ -91,9 +90,9 @@ Kellonaika: <input type="time" name="time">
 <p>
 <form action="/addweight" method="POST">
 Nimi: 
-<select name="name">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+<select name="baby">
+{% for baby in babies %}
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select> 
 <p>
@@ -109,9 +108,9 @@ Päivämäärä: <input type="date" name="date">
 <p>
 <form action="/addmessage" method="POST">
 Nimi: 
-<select name="name">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+<select name="baby">
+{% for baby in babies %}
+<option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}
 </select> 
 <p>

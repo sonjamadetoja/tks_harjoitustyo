@@ -11,14 +11,11 @@ def addbaby(name):
     db.session.commit()
     return True
 
-def addweight(name, weight, date):
+def addweight(baby, weight, date):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = baby
     sql = "INSERT INTO weight (baby_id, date, weight) VALUES (:baby_id, :date, :weight)"
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "weight":weight})
     db.session.commit()
@@ -34,40 +31,31 @@ def addbrfeed(baby, date, duration):
     db.session.commit()
     return True
 
-def addformula(name, date, amount):
+def addformula(baby, date, amount):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = baby
     sql = " INSERT INTO formula (baby_id, date, amount_ml) VALUES (:baby_id, :date, :amount)"
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "amount":amount})
     db.session.commit()
     return True
 
-def addsolid(name, date, amount, food):
+def addsolid(baby, date, amount, food):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = baby
     sql = "INSERT INTO solid (baby_id, date, amount_gr, food) VALUES (:baby_id, :date, :amount, :food)"
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "amount":amount, "food":food})
     db.session.commit()
     return True
 
-def adddiaper(name, date, diaper_content):
+def adddiaper(baby, date, diaper_content):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = baby
     sql = "SELECT id FROM diaper_content WHERE name=:diaper_content"
     result = db.session.execute(sql, {"diaper_content":diaper_content})
     diaper_content_id = result.fetchone()
@@ -77,14 +65,11 @@ def adddiaper(name, date, diaper_content):
     db.session.commit()
     return True
 
-def addmessage(name, date, message):
+def addmessage(baby, date, message):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = baby
     sql = "INSERT INTO messages (baby_id, date, content) VALUES (:baby_id, :date, :message)"
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "message":message})
     db.session.commit()
@@ -115,6 +100,16 @@ def getbaby():
     baby = db.session.execute(sql, {"user_id":user_id})
     return baby.fetchall()
 
+
+def getbabyname(baby):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    baby_id = baby
+    sql = "SELECT name FROM babies WHERE id=:baby_id;"
+    baby = db.session.execute(sql, {"baby_id":baby_id})
+    return baby.fetchone()
+
 def getuser():
     user_id = users.user_id()
     if user_id == 0:
@@ -127,10 +122,7 @@ def getbrfeed(query):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:query"
-    result = db.session.execute(sql, {"query":query})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = query
     sql = "SELECT date, duration FROM breastfeeding WHERE baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
@@ -139,10 +131,7 @@ def getformula(query):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:query"
-    result = db.session.execute(sql, {"query":query})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = query
     sql = "SELECT date, amount_ml FROM formula WHERE baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
@@ -151,10 +140,7 @@ def getsolid(query):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:query"
-    result = db.session.execute(sql, {"query":query})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = query
     sql = "SELECT date, amount_gr, food FROM solid WHERE baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
@@ -163,10 +149,7 @@ def getdiaper(query):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:query"
-    result = db.session.execute(sql, {"query":query})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = query
     sql = "SELECT D.date, DC.name FROM diapers D, diaper_content DC WHERE D.diaper_content_id=DC.id AND baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
@@ -175,10 +158,7 @@ def getweight(query):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:query"
-    result = db.session.execute(sql, {"query":query})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = query
     sql = "SELECT date, weight FROM weight WHERE baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
@@ -187,10 +167,7 @@ def getmessage(query):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:query"
-    result = db.session.execute(sql, {"query":query})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    baby_id = query
     sql = "SELECT date, content FROM messages WHERE baby_id=:baby_id ORDER BY date"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()

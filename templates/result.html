@@ -13,15 +13,15 @@
 <h2>Vauvan tiedot</h2>
 
 Vauva:
-<b> {{ query }} </b> <p>
+<b> {{ name }} </b> <p>
 Tiedot:
 <TABLE>
    <TR>
       <TD> <b> Imetykset </b> </TD>
    </TR>
-{% for i in brfeed %}
+{% for x in brfeed %}
    <TR>
-      <TD> {{ i }} </TD>
+      <TD> {{ x }} </TD>
    </TR>
 {% endfor %}
 </TABLE>
@@ -30,9 +30,9 @@ Tiedot:
    <TR>
       <TD> <b> Korvike </b> </TD>
    </TR>
-{% for i in formula %}
+{% for x in formula %}
    <TR>
-      <TD> {{ i }} </TD>
+      <TD> {{ x }} </TD>
    </TR>
 {% endfor %}
 </TABLE>
@@ -41,9 +41,9 @@ Tiedot:
    <TR>
       <TD> <b> Kiinteä ruoka </b> </TD>
    </TR>
-{% for i in solid %}
+{% for x in solid %}
    <TR>
-      <TD> {{ i }} </TD>
+      <TD> {{ x }} </TD>
    </TR>
 {% endfor %}
 </TABLE>
@@ -52,9 +52,9 @@ Tiedot:
    <TR>
       <TD> <b> Vaippa </b> </TD>
    </TR>
-{% for i in diapers %}
+{% for x in diapers %}
    <TR>
-      <TD> {{ i }} </TD>
+      <TD> {{ x }} </TD>
    </TR>
 {% endfor %}
 </TABLE>
@@ -63,9 +63,9 @@ Tiedot:
    <TR>
       <TD> <b> Paino </b> </TD>
    </TR>
-{% for i in weight %}
+{% for x in weight %}
    <TR>
-      <TD> {{ i }} </TD>
+      <TD> {{ x }} </TD>
    </TR>
 {% endfor %}
 </TABLE>
@@ -74,9 +74,9 @@ Tiedot:
    <TR>
       <TD> <b> Viestit </b> </TD>
    </TR>
-{% for i in messages %}
+{% for x in messages %}
    <TR>
-      <TD> {{ i }} </TD>
+      <TD> {{ x }} </TD>
    </TR>
 {% endfor %}
 </TABLE>
