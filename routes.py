@@ -2,6 +2,7 @@ from app import app
 from flask import redirect, render_template, request, session
 import db, content, users
 import datetime
+import secrets
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 env = Environment(
@@ -74,6 +75,8 @@ def addsuccess():
 
 @app.route("/addbaby", methods=["post"])
 def addbaby():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     if len(name) == 0:
         return render_template("error.html", message="Et antanut vauvalle nimeä.")
@@ -86,6 +89,8 @@ def addbaby():
 
 @app.route("/addweight", methods=["post"])
 def addweight():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     weight = request.form["weight"]
     date = request.form["date"]
@@ -104,6 +109,8 @@ def addweight():
 
 @app.route("/addbrfeed", methods=["post"])
 def addbrfeed():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     date = request.form["date"]
     start_time = request.form["start_time"]
@@ -126,6 +133,8 @@ def addbrfeed():
 
 @app.route("/addformula", methods=["post"])
 def addformula():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     amount = request.form["amount"]
     date = request.form["date"]
@@ -148,6 +157,8 @@ def addformula():
 
 @app.route("/addsolid", methods=["post"])
 def addsolid():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     food = request.form["food"]
     amount = request.form["amount"]
@@ -175,6 +186,8 @@ def addsolid():
 
 @app.route("/adddiaper", methods=["post"])
 def adddiaper():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     diaper_content = request.form["diaper"]
     date = request.form["date"]
@@ -191,6 +204,8 @@ def adddiaper():
 
 @app.route("/addmessage", methods=["post"])
 def addmessage():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     name = request.form["name"]
     message = request.form["message"]
     date = datetime.datetime.now()
@@ -203,8 +218,10 @@ def addmessage():
     else: 
         return render_template("error.html", message="Viestin lisääminen ei onnistunut.")
 
-@app.route("/addrights")
+@app.route("/addrights", methods=["get", "post"])
 def addrights():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     user = request.form["query_user"]
     name = request.form["name"]
     if content.addrights(user, name):

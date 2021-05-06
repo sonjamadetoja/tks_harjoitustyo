@@ -15,6 +15,7 @@
 Nimi: <input type="text" name="name">
 <p>
 <input type="submit" value="Lisää">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <p>
 <h3>Lisää vauvan tietoja</h3>
@@ -32,6 +33,7 @@ Päivämäärä: <input type="date" name="date"> <p>
 Aloitusaika: <input type="time" name="start_time"> <p> 
 Kesto (minuuttia): <input type="number" name="duration"> 
 <p>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
   <li> Korvike: <p>
@@ -47,6 +49,7 @@ Päivämäärä: <input type="date" name="date"> <p>
 Aloitusaika: <input type="time" name="start_time">  <p>
 Määrä (ml): <input type="number" name="amount">    
 <p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
   <li> Kiinteä ruoka <p>
@@ -63,6 +66,7 @@ Määrä (grammaa): <input type="number" name="amount"> <p>
 Päivämäärä: <input type="date" name="date"> <p>
 Aloitusaika: <input type="time" name="start_time"> 
 <p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
   <li> Vaipat <p>
@@ -79,6 +83,7 @@ Sisältö: <br>
 Päivämäärä: <input type="date" name="date">  <p>
 Kellonaika: <input type="time" name="time">  
 <p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
   <li> Paino
@@ -94,6 +99,7 @@ Nimi:
 Paino (grammaa):  <input type="number" name="weight"> <p>
 Päivämäärä: <input type="date" name="date"> 
 <p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
 
@@ -111,6 +117,7 @@ Nimi:
 Viesti: <p>
 <textarea name="message" rows="6" cols="50">
 </textarea> <p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää">
 </form>
 

@@ -28,6 +28,7 @@ Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tiet
     {% endfor %}
     </select>
     <p>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="Anna oikeus">
     
 </form>
