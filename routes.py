@@ -253,7 +253,7 @@ def search():
     list = content.getdiaper(query)
     diapers = []
     for row in list:
-        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y') + ", sisältö: "+str(row[1])
+        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", sisältö: "+str(row[1])
         diapers.append(tpl)
     list = content.getweight(query)
     weight = []
