@@ -24,15 +24,12 @@ def addweight(name, weight, date):
     db.session.commit()
     return True
 
-def addbrfeed(name, date, duration):
+def addbrfeed(baby, date, duration):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
-    sql = " INSERT INTO breastfeeding (baby_id, date, duration) VALUES (:baby_id, :date, :duration)"
+    baby_id = baby
+    sql = "INSERT INTO breastfeeding (baby_id, date, duration) VALUES (:baby_id, :date, :duration)"
     db.session.execute(sql, {"baby_id":baby_id, "date":date, "duration":duration})
     db.session.commit()
     return True
@@ -114,7 +111,7 @@ def getbaby():
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT B.name FROM babies AS B JOIN rights AS R ON B.user_id = R.babyowner_user_id AND B.id = R.baby_id AND R.babywatcher_user_id=:user_id UNION SELECT name FROM babies WHERE user_id=:user_id;"
+    sql = "SELECT B.id, B.name FROM babies AS B JOIN rights AS R ON B.user_id = R.babyowner_user_id AND B.id = R.baby_id AND R.babywatcher_user_id=:user_id UNION SELECT id, name FROM babies WHERE user_id=:user_id;"
     baby = db.session.execute(sql, {"user_id":user_id})
     return baby.fetchall()
 

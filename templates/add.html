@@ -23,9 +23,9 @@ Nimi: <input type="text" name="name">
   <li> Imetys: <p>
 <form action="/addbrfeed" method="POST">
 Nimi: 
-<select name="name">
-{% for i in list %}
-<option value={{ i }} selected> {{ i }}
+<select name="baby">
+{% for baby in babies %}
+<option value=baby[0] selected> baby[1]
 {% endfor %}
 </select> 
 <p>
@@ -36,6 +36,7 @@ Kesto (minuuttia): <input type="number" name="duration">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
+<!--
   <li> Korvike: <p>
 <form action="/addformula" method="POST">
 Nimi: 
@@ -120,7 +121,7 @@ Viesti: <p>
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää">
 </form>
-
+-->
 </ul>
 {% else %}
 Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>

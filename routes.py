@@ -63,11 +63,8 @@ def main():
 
 @app.route("/add")
 def add():
-    list = content.getbaby()
-    new_list = []
-    for row in list:
-        new_list.append(row[0])
-    return render_template("add.html", list=new_list)
+    tpl = content.getbaby()
+    return render_template("add.html", babies=tpl)
 
 @app.route("/addsuccess")
 def addsuccess():
@@ -111,7 +108,7 @@ def addweight():
 def addbrfeed():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
-    name = request.form["name"]
+    baby = request.form["baby"]
     date = request.form["date"]
     start_time = request.form["start_time"]
     if date == "":
@@ -126,7 +123,7 @@ def addbrfeed():
         return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska antamasi kesto on alle 0 minuuttia.")
     if int(duration) > 1500:
         return render_template("error.html", message="Imetyksen lisääminen ei onnistunut, koska annoit imetykselle liian suuren keston. Keston tulee olla korkeintaan 1500 min.")
-    if content.addbrfeed(name, date, duration):
+    if content.addbrfeed(baby, date, duration):
         return redirect("/addsuccess")
     else: 
         return render_template("error.html", message="Imetyksen lisääminen ei onnistunut.")
