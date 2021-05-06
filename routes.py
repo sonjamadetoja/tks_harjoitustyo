@@ -218,7 +218,7 @@ def addmessage():
     else: 
         return render_template("error.html", message="Viestin lisääminen ei onnistunut.")
 
-@app.route("/addrights", methods=["post"])
+@app.route("/addrights", methods=["get", "post"])
 def addrights():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")

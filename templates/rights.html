@@ -11,20 +11,20 @@
 <br>
 Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tietoja.
 
-<form action="/addrights" method="GET">
+<form action="/addrights" method="POST">
     <p>
     Valitse käyttäjä:
-    <select name="query_user">
-    {% for i in user_list %}
-    <option value={{ i }} selected> {{ i }}
+    <select name="user">
+    {% for user in user_list %}
+    <option value={{ user }} selected> {{ user }}
     {% endfor %}
     </select>
     <p>
         
     Valitse vauva:
     <select name="name">
-    {% for i in baby_list %}
-    <option value={{ i }} selected> {{ i }}
+    {% for baby in baby_list %}
+    <option value={{ baby }} selected> {{ baby }}
     {% endfor %}
     </select>
     <p>
