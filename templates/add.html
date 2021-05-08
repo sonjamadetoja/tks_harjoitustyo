@@ -19,8 +19,7 @@ Nimi: <input type="text" name="name">
 </form>
 <p>
 <h3>Lisää vauvan tietoja</h3>
-<ul>
-  <li> Imetys: <p>
+<h4>Imetys:</h4>
 <form action="/addbrfeed" method="POST">
 Nimi: 
 <select name="baby">
@@ -36,7 +35,7 @@ Kesto (minuuttia): <input type="number" name="duration">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
-  <li> Korvike: <p>
+  <h4> Korvike: </h4>
 <form action="/addformula" method="POST">
 Nimi: 
 <select name="baby">
@@ -52,7 +51,7 @@ Määrä (ml): <input type="number" name="amount">
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
-  <li> Kiinteä ruoka <p>
+  <h4> Kiinteä ruoka </h4>
 <form action="/addsolid" method="POST">
 Nimi: 
 <select name="baby">
@@ -69,7 +68,7 @@ Aloitusaika: <input type="time" name="start_time">
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
-  <li> Vaipat <p>
+  <h4> Vaipat </h4>
 <form action="/adddiaper" method="POST">
 Nimi: 
 <select name="baby">
@@ -86,8 +85,7 @@ Kellonaika: <input type="time" name="time">
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
-  <li> Paino
-<p>
+  <h4> Paino </h4>
 <form action="/addweight" method="POST">
 Nimi: 
 <select name="baby">
@@ -102,10 +100,7 @@ Päivämäärä: <input type="date" name="date">
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää" <br>
 </form>
-
-
-  <li> Viesti
-<p>
+<h4> Viesti </h4>
 <form action="/addmessage" method="POST">
 Nimi: 
 <select name="baby">
@@ -120,8 +115,7 @@ Viesti: <p>
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Lisää">
 </form>
--->
-</ul>
+
 {% else %}
 Et ole kirjautunut. <a href="/login">Kirjaudu tästä</a>
 {% endif %}

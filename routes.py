@@ -220,23 +220,20 @@ def addrights():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
     user = request.form["user"]
-    name = request.form["name"]
-    if content.addrights(user, name):
+    baby = request.form["baby"]
+    if content.addrights(user, baby):
         return render_template("rightssuccess.html")
     else:
         return render_template("error.html", message="Oikeuksien myöntäminen ei onnistunut.")
 
 @app.route("/rights")
 def rights():
-    list = content.getuser()
-    user_list = []
-    for row in list:
-        user_list.append(row[0])
-    list = content.getbaby()
-    baby_list = []
-    for row in list:
-        baby_list.append(row[0])
-    return render_template("rights.html", user_list=user_list, baby_list=baby_list)
+    users = content.getuser()
+    babies = content.getownbaby()
+    if len(babies) == 0:
+        return render_template("error.html", message="Et ole lisännyt sovellukseen lapsia, joten et voi myöskään antaa muille käyttäjille oikeuksia heidän tietojensa katselemiseen tai muuttamiseen.")
+    else:
+        return render_template("rights.html", users=users, babies=babies)
 
 @app.route("/browse")
 def browse():

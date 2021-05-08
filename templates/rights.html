@@ -15,16 +15,16 @@ Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tiet
     <p>
     Valitse käyttäjä:
     <select name="user">
-    {% for user in user_list %}
-    <option value={{ user }} selected> {{ user }}
+    {% for user in users %}
+    <option value={{ user[0] }} selected> {{ user[1] }}
     {% endfor %}
     </select>
     <p>
         
     Valitse vauva:
-    <select name="name">
-    {% for baby in baby_list %}
-    <option value={{ baby }} selected> {{ baby }}
+    <select name="baby">
+    {% for baby in babies %}
+    <option value={{ baby[0] }} selected> {{ baby[1] }}
     {% endfor %}
     </select>
     <p>

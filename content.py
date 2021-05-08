@@ -75,18 +75,12 @@ def addmessage(baby, date, message):
     db.session.commit()
     return True
 
-def addrights(user, name):
+def addrights(user, baby):
     babyowner_user_id = users.user_id()
     if babyowner_user_id == 0:
         return False
-    sql = "SELECT id FROM users WHERE name=:user"
-    result = db.session.execute(sql, {"user":user})
-    babywatcher_user_id = result.fetchone()
-    babywatcher_user_id = babywatcher_user_id[0]
-    sql = "SELECT id FROM babies WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
-    baby_id = result.fetchone()
-    baby_id = baby_id[0]
+    babywatcher_user_id = user
+    baby_id = baby
     sql = "INSERT INTO rights (babyowner_user_id, babywatcher_user_id, baby_id) VALUES (:babyowner_user_id, :babywatcher_user_id, :baby_id)"
     db.session.execute(sql, {"babyowner_user_id":babyowner_user_id, "babywatcher_user_id":babywatcher_user_id, "baby_id":baby_id})
     db.session.commit()
@@ -100,6 +94,13 @@ def getbaby():
     baby = db.session.execute(sql, {"user_id":user_id})
     return baby.fetchall()
 
+def getownbaby():
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT id, name FROM babies WHERE user_id=:user_id;"
+    baby = db.session.execute(sql, {"user_id":user_id})
+    return baby.fetchall()
 
 def getbabyname(baby):
     user_id = users.user_id()
@@ -114,7 +115,7 @@ def getuser():
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "SELECT name FROM users"
+    sql = "SELECT id, name FROM users"
     names = db.session.execute(sql)
     return names.fetchall()
 
