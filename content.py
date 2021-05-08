@@ -119,6 +119,14 @@ def getuser():
     names = db.session.execute(sql)
     return names.fetchall()
 
+def getrights():
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    sql = "SELECT U.name, R.babywatcher_user_id, R.baby_id, B.name FROM rights AS R, users AS U, babies AS B WHERE babyowner_user_id=:user_id AND U.id=babywatcher_user_id AND baby_id=B.id ORDER BY U.name, B.name;"
+    result = db.session.execute(sql, {"user_id":user_id})
+    return result.fetchall()
+
 def getbrfeed(query):
     user_id = users.user_id()
     if user_id == 0:

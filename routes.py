@@ -230,10 +230,11 @@ def addrights():
 def rights():
     users = content.getuser()
     babies = content.getownbaby()
+    rights = content.getrights()
     if len(babies) == 0:
         return render_template("error.html", message="Et ole lisännyt sovellukseen lapsia, joten et voi myöskään antaa muille käyttäjille oikeuksia heidän tietojensa katselemiseen tai muuttamiseen.")
     else:
-        return render_template("rights.html", users=users, babies=babies)
+        return render_template("rights.html", users=users, babies=babies, rights=rights)
 
 @app.route("/browse")
 def browse():
