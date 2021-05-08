@@ -2,7 +2,7 @@
 
 ## Tilanne tällä hetkellä
 
-Sovellusta voi testata Herokussa: https://tsoha-vauvanhoitosovellus.herokuapp.com/ Sovelluksessa toimivat rekisteröityminen, sisäänkirjautuminen, uloskirjautuminen, vauvan lisääminen ja tietojen (imetys, korvike, kiinteä ruoka, vaipat, paino) lisääminen sekä tietojen katselemine. Viestien lisääminen ja katsominen sekä vauvan tietojen katselu- ja tallennusoikeuksien antaminen muille eivät vielä toimi.
+Sovellusta voi testata Herokussa: https://tsoha-vauvanhoitosovellus.herokuapp.com/ Perusversion tarjoama toiminnallisuus on toteutettu.
 
 ## Sovelluksen tarkoitus
 
@@ -31,15 +31,16 @@ Seuraavat sivut:
 
 * rekisteröityminen ja sisäänkirjautuminen
 * salasana
-* seuraavien tietojen kirjaus ja poisto vauvakohtaisesti: imetyksen ajankohta ja kesto, korvikkeen antamisen ajankohta ja määrä, kiinteän ruuan antamisen ajankohta ja määrä, vaihdettujen vaippojen määrä ja sisältö, ja painoseuranta
+* seuraavien tietojen kirjaus vauvakohtaisesti: imetyksen ajankohta ja kesto, korvikkeen antamisen ajankohta ja määrä, kiinteän ruuan antamisen ajankohta ja määrä, vaihdettujen vaippojen määrä ja sisältö, ja painoseuranta
 * tietojen katseleminen
 * kommentin jättäminen
 * uloskirjautuminen
-* antaa muille yksittäisille käyttäjille oikeus vauvan tietojen katsomiseen, muuttamiseen tai kommentoimiseen
+* antaa muille yksittäisille käyttäjille oikeus vauvan tietojen katsomiseen, lisäämiseen tai kommentoimiseen
 
 
 ## Jatkokehitysideoita
 
+* tietojen poistaminen
 * käyttäjätilin poistaminen
 * tilastojen sekä visualisointien hakeminen tallennetuista tiedoista
 * tietojen lähettäminen muille sähköpostitse
