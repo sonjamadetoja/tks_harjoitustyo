@@ -29,7 +29,7 @@ img {
     max-width:100%;
 }
 
-table {
+table.table1 {
     padding: 15px;
     text-align: center;
     border-collapse: collapse;
