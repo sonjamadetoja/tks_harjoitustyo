@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<h2>Tietojen tallentaminen</h2>
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}. <a href="/logout">Kirjaudu ulos</a>
 <p>
@@ -8,7 +9,6 @@
 </p>
 <p>
 
-<h2>Tietojen tallentaminen</h2>
 <h3>Lisää vauva</h3>
 <p>
 <form action="/addbaby" method="POST">
@@ -23,6 +23,8 @@ Nimi: <input type="text" name="name">
 <form action="/addbrfeed" method="POST">
 Nimi: 
 <select name="baby">
+  <h2>Tietojen hakeminen</h2>
+  
 {% for baby in babies %}
 <option value={{ baby[0] }} selected> {{ baby[1] }}
 {% endfor %}

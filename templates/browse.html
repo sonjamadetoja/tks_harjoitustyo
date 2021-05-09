@@ -2,13 +2,13 @@
 {% block content %}
 
 
+<h2>Tietojen hakeminen</h2>
+
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}. <a href="/logout">Kirjaudu ulos</a>
 <p>
 <a href="/main"> Palaa etusivulle </a>
 <p>
-
-<h2>Tietojen hakeminen</h2>
 
 <form action="/search" method="GET">
 <p>
