@@ -1,1 +1,5 @@
 templates/__pycache__/
+.env
+venv
+settings.json
+.pylintrc
