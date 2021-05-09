@@ -226,6 +226,17 @@ def addrights():
     else:
         return render_template("error.html", message="Oikeuksien myöntäminen ei onnistunut.")
 
+@app.route("/removerights", methods=["get", "post"])
+def removerights():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Ei oikeuksia tähän toimintoon.")
+    user = request.form["user"]
+    baby = request.form["baby"]
+    if content.removerights(user, baby):
+        return render_template("removerightssuccess.html")
+    else:
+        return render_template("error.html", message="Oikeuksien poistamnen ei onnistunut.")
+
 @app.route("/rights")
 def rights():
     users = content.getuser()

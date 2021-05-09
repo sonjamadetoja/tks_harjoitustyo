@@ -9,7 +9,7 @@
     <a href="/main"> Palaa etusivulle </a>
     <p>
 <br>
-Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tietoja.
+Tässä voit antaa muille käyttäjille oikeuden katsoa tai muuttaa lapsesi tietoja. Voit myös poistaa antamiasi oikeuksia.
 
 Tällä hetkellä olet antanut seuraaville käyttäjille oikeudet:
 <TABLE BORDER="2" WIDTH=auto CELLPADDING="4" CELLSPACING="3">
@@ -42,6 +42,7 @@ Tällä hetkellä olet antanut seuraaville käyttäjille oikeudet:
     <p>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="Anna oikeus">
+    <input type="submit" value="Poista oikeus" formaction="/removerights">
     
 </form>
 

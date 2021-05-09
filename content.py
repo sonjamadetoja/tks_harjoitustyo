@@ -86,6 +86,17 @@ def addrights(user, baby):
     db.session.commit()
     return True
 
+def removerights(user, baby):
+    babyowner_user_id = users.user_id()
+    if babyowner_user_id == 0:
+        return False
+    babywatcher_user_id = user
+    baby_id = baby
+    sql = "DELETE FROM rights WHERE(babyowner_user_id=:babyowner_user_id AND babywatcher_user_id=:babywatcher_user_id AND baby_id=:baby_id)"
+    db.session.execute(sql, {"babyowner_user_id":babyowner_user_id, "babywatcher_user_id":babywatcher_user_id, "baby_id":baby_id})
+    db.session.commit()
+    return True
+
 def getbaby():
     user_id = users.user_id()
     if user_id == 0:
