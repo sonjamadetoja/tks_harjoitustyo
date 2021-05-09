@@ -35,7 +35,7 @@ Seuraavat sivut:
 * tietojen katseleminen
 * kommentin jättäminen
 * uloskirjautuminen
-* antaa muille yksittäisille käyttäjille oikeus vauvan tietojen katsomiseen, lisäämiseen tai kommentoimiseen
+* antaa muille yksittäisille käyttäjille oikeus vauvan tietojen katsomiseen, lisäämiseen tai kommentoimiseen sekä oikeuksien poistainen
 
 
 ## Jatkokehitysideoita
