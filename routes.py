@@ -284,7 +284,7 @@ def search():
     list = content.getmessage(query)
     messages = []
     for row in list:
-        tpl = "Pvm: "+row[0].strftime('%d.%m.%Y, klo: %H:%M') + ", " + "Viesti: "+str(row[1])
+        tpl = "Pvm: "+row[1].strftime('%d.%m.%Y, klo: %H:%M') + ", kirjoittaja: "+str(row[0]) + ", " + "viesti: "+str(row[2])
         messages.append(tpl)
     return render_template("result.html", name=name, brfeed=brfeed, formula=formula, solid=solid, weight=weight, diapers=diapers, messages=messages)
 

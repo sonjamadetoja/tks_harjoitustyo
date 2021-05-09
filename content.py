@@ -70,8 +70,8 @@ def addmessage(baby, date, message):
     if user_id == 0:
         return False
     baby_id = baby
-    sql = "INSERT INTO messages (baby_id, date, content) VALUES (:baby_id, :date, :message)"
-    db.session.execute(sql, {"baby_id":baby_id, "date":date, "message":message})
+    sql = "INSERT INTO messages (user_id, baby_id, date, content) VALUES (:user_id, :baby_id, :date, :message)"
+    db.session.execute(sql, {"user_id":user_id, "baby_id":baby_id, "date":date, "message":message})
     db.session.commit()
     return True
 
@@ -188,6 +188,6 @@ def getmessage(query):
     if user_id == 0:
         return False
     baby_id = query
-    sql = "SELECT date, content FROM messages WHERE baby_id=:baby_id ORDER BY date"
+    sql = "SELECT U.name, M.date, M.content FROM messages M, users U WHERE baby_id=:baby_id AND M.user_id=U.id ORDER BY date;"
     result = db.session.execute(sql, {"baby_id":baby_id})
     return result.fetchall()
